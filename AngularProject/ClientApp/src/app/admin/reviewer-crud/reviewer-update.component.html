@@ -1,0 +1,25 @@
+<div>
+    <br />
+    <div class="row">
+      <div class="col">
+        <h3>Update Reviewer</h3>
+      </div>
+      <div class="col text-right">
+        <a href="#" routerLink="/admin/reviewer-list" class="btn btn-secondary btn-sm" id="button3">Back To Reviewer List</a>
+      </div>
+    </div>
+    <br />
+    <form [formGroup]="service.reviewerForm" (ngSubmit)="onSubmit()" autocomplete="off">
+        <input formControlName="Id" id="id" type="hidden" [ngModel]="this.id"/>
+
+      <div class="form-group">
+        <label for="Joined">Joined: </label>
+        <input formControlName="Joined"
+               id="Joined"
+               type="text"
+               class="form-control" />
+      </div>
+   
+      <button class="btn btn-primary" type="submit" [disabled]="!service.reviewerForm.valid">Update</button>
+    </form>
+  </div>

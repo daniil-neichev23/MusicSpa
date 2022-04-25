@@ -1,0 +1,39 @@
+<div class="loadWrapper" *ngIf="isLoading">  
+  <div class="loader"></div>  
+</div>
+<div>
+    <br />
+    <div class="row">
+      <div class="col">
+        <h3>Group Members</h3>
+      </div>
+      <div class="col text-right">
+        <a href="#" routerLink="/admin/group-member-list/create/" class="btn btn-success btn-sm">Create New</a>
+      </div>
+    </div>
+    <br /> 
+
+    <table class="table table-bordered table-sm">
+        <thead>
+      <tr>
+        <th>Joined</th>
+        <th>Left</th>
+        <th>Musician</th>
+        <th>Artist</th>
+        <th width="200px"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let grm of Data">
+        <td>{{ grm.joined }}</td>
+        <td>{{ grm.left }}</td>
+        <td>{{ grm.musician.lastName }}</td>
+        <td>{{ grm.artist.name }}</td>
+        <td class="text-right"> 
+          <a href="#" [routerLink]="['/admin/group-member-list/update/',grm.id]" class="btn btn-primary btn-sm">Edit</a> 
+          <button type="button" (click)="deleteData(grm.id)" class="btn btn-danger btn-sm">Delete</button> 
+        </td>
+      </tr>
+    </tbody>
+    </table>
+  </div>

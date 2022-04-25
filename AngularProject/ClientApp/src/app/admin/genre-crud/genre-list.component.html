@@ -1,0 +1,73 @@
+<div class="loadWrapper" *ngIf="isLoading">  
+  <div class="loader"></div>  
+</div>
+    <div>
+        <div class="row">
+          <div class="col">
+            <link href='https://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+            <h1>
+              <em>G</em>
+              <em class="planet left">E</em>
+              <em>N</em>
+              <em>R</em>
+              <em class="planet right">E</em>
+              <em>S</em>
+            </h1>
+          </div>
+          <div class="col text-right">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+            <a href="#" routerLink="/admin/album-list/create/" class="button2" tabindex="0"></a>
+            <button style="left: 200px; top: 60px;" routerLink="/admin/genre-list/create/" class="glow-on-hover" type="button">
+              Create New</button>
+          </div>
+        </div>
+        <br /> 
+        <div class="album py-5">
+          <div class="container">
+              <div class="row">
+                      <table class="table table-hover">
+                      <thead>
+                    <tr class="bg-primary">
+                      <th scope="col">Genre`s Name</th>
+                      <th scope="col">Recordings</th>
+                      <th width="200px"></th>
+                    </tr>
+                  </thead>
+                  <tbody> 
+                    <tr class="table-dark" *ngFor="let ar of Data">
+                      <td>{{ar.name}}</td>
+                      <td>
+                        <button class="btn btn-danger" (click)="triggerModal(modalData)">Recordings</button>
+
+                        <ng-template #modalData let-modal>
+                          <div class="modal-header">
+                            <h4 class="modal-title" id="modal-basic-title">Recordings</h4>
+                            <button  class="btn close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                              <span aria-hidden="true">x</span>
+                            </button>
+                          </div>
+                          <div class="modal-body" *ngIf="ar.recordings.length !== 0; else isEmpty">
+                            <ul *ngFor="let p of ar.recordings"><li>{{ p.title }}</li></ul>
+                          </div>
+                          <ng-template #isEmpty>
+                            <p style="color: black;">This section is empty!</p>
+                          </ng-template>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" (click)="modal.close('Save click')">Close</button>
+                          </div>
+                        </ng-template>
+                      </td>
+                      <td>
+                        <form action="">
+                          <button class="button" [routerLink]="['/admin/genre-list/update/',ar.id]" id="edit">
+                            <i class="fa fa-pencil-square-o"></i></button>
+                          <button class="button" (click)="deleteData(ar.id)" id="trash"><i class="fa fa-trash-o"></i></button>
+                        </form>
+                      </td>
+                    </tr>
+                  </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>    
+    </div>

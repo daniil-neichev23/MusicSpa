@@ -1,0 +1,311 @@
+<div class="container">
+  <br />
+  <div class="row">
+    <div class="col">
+      <h3>Create Album</h3>
+    </div>
+    <div class="col" >
+      <a href="#" routerLink="/admin/album-list" class="btn btn-secondary btn-sm" id="button3">Back To Albums List</a>
+    </div>
+  </div>
+  <br />
+  <form [formGroup]="service.albumForm" (ngSubmit)="onSubmit()" autocomplete="off"> 
+      
+    <div class="form-group">
+      <label for="Title">Title: </label>
+      <input formControlName="Title"
+             id="Title"
+             type="text"
+             class="form-control" />
+    </div>
+ 
+    <div class="form-group">
+      <label for="Year">Year: </label>
+      <input formControlName="Year"
+             id="Year"
+             type="text"
+             class="form-control" />
+    </div>
+ 
+    <div class="form-group">
+      <label for="artist-name">Artist:</label>
+      <select formControlName="ArtistId"
+              id="ArtistId"
+              class="form-control">
+        <option value="">- Select -</option>
+        <option *ngFor="let art of artistArray" [ngValue]="art.id">
+          {{art.name}}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="label-name">Label:</label>
+      <select formControlName="LabelId"
+              id="LabelId"
+              class="form-control">
+        <option value="">- Select -</option>
+        <option *ngFor="let lab of labelArray" [ngValue]="lab.id">
+          {{lab.name}}
+        </option>
+      </select>
+    </div>
+ 
+    <button class="btn btn-primary" type="submit" [disabled]="!service.albumForm.valid">Create</button>
+  </form>
+</div>
+<!-- <div class="container">    
+    <mat-card class="mat-elevation-z8">    
+      <mat-toolbar color="accent" style="box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);">    
+        <div align="center" style="color:white;text-align: right;">    
+          Codingvila | Angular 11 Application using Web API With Material Design    
+        </div>    
+      </mat-toolbar>    
+      <br><br>    
+      <mat-card-content>    
+        <form [formGroup]="service.albumForm" (ngSubmit)="onFormSubmit()">    
+          <table>    
+            <tr>    
+              <td class="tbl1">    
+                <mat-form-field class="demo-full-width">    
+                  <input formControlName="Title" matTooltip="Enter Album`s Title" matInput placeholder="Title of the album" autocomplete="off">    
+                </mat-form-field>    
+                <mat-error>    
+                  <span *ngIf="!service.albumForm.get('Title').value && service.albumForm.get('Title').touched"></span>    
+                </mat-error>    
+              </td>    
+              <td class="tbl1">    
+                <mat-form-field class="demo-full-width">    
+                  <input formControlName="Year" matTooltip="Enter Album`s Year" matInput placeholder="Year of drop" autocomplete="off">    
+                </mat-form-field>    
+                <mat-error>    
+                  <span *ngIf="!service.albumForm.get('Year').value && service.albumForm.get('Year').touched"></span>    
+                </mat-error>    
+              </td>    
+               <td class="tbl1">    
+                <mat-form-field class="demo-full-width">    
+                  <input matInput [matDatepicker]="picker" matTooltip="Enter Date Of Birth" formControlName="DateofBirth" placeholder="Date Of Birth" autocomplete="off">    
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>    
+                  <mat-datepicker #picker></mat-datepicker>    
+                </mat-form-field>    
+                <mat-error>    
+                  <span *ngIf="!employeeForm.get('DateofBirth').value && employeeForm.get('DateofBirth').touched"></span>    
+                </mat-error>    
+              </td>    
+              <td class="tbl1">    
+                <mat-form-field class="demo-full-width">    
+                  <input formControlName="EmailId" matTooltip="Enter EmailId" matInput placeholder="Email ID" autocomplete="off">    
+                </mat-form-field>    
+                <mat-error>    
+                  <span *ngIf="!employeeForm.get('EmailId').value && employeeForm.get('EmailId').touched"></span>    
+                </mat-error>    
+              </td>    
+              <td class="tbl1">    
+                <span>Gender</span>     
+       
+                <mat-radio-group matTooltip="Enter Gender" formControlName="Gender">    
+                  <mat-radio-button value="0" [checked]="isMale">Male</mat-radio-button>      
+                  <mat-radio-button value="1" [checked]="isFeMale">Female</mat-radio-button>      
+                </mat-radio-group>    
+                <mat-error>    
+                  <span *ngIf="!employeeForm.get('Gender').value && employeeForm.get('Gender').touched"></span>    
+                </mat-error>    
+              </td>      
+            </tr>    
+            <tr>    
+                <td class="tbl1">
+                    <mat-form-field>
+                        <mat-label>Artist</mat-label>
+                        <mat-select formControlName="Artist" (selectionChange)="GetSelectedArtist($event)" matTooltip="Select Artist"
+                            autocomplete="off">
+                            <mat-option *ngFor="let Artist of (allArtist | async)" [value]="Artist.Id">
+                                {{Artist.Name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </td>
+                <td class="tbl1">
+                    <mat-form-field>
+                        <mat-label>Label</mat-label>
+                        <mat-select formControlName="Label" (selectionChange)="GetSelectedLabel($event)" matTooltip="Select Label"
+                            autocomplete="off">
+                            <mat-option *ngFor="let Label of (allLabel | async)" [value]="Label.Id">
+                                {{Label.Name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </td> 
+            </tr> 
+            <tr>    
+              <td class="content-center">    
+                <button type="submit" mat-raised-button color="accent" matTooltip="Submit" [disabled]="!service.albumForm.valid">Submit</button>        
+                <button type="reset" mat-raised-button color="accent" matTooltip="Reset" (click)="resetForm()">Reset</button>    
+              </td>    
+              <td>    
+                <p *ngIf="dataSaved" style="color:rgb(0, 128, 0);font-size:20px;font-weight:bold" Class="success" align="left">    
+                  {{message}}    
+                </p>    
+              </td>    
+              <td></td>    
+              <td></td>    
+            </tr>    
+          </table>    
+          <br><br>    
+       
+          <mat-form-field>    
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">    
+          </mat-form-field>    
+                  
+      <button mat-icon-button aria-label="Example icon button with a delete icon" type="button" mat-raised-button color="accent" matTooltip="Delete" (click)="DeleteData()"><mat-icon>delete</mat-icon></button>      
+       
+          <div>    
+       
+            <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" style="box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);">    
+       
+               Checkbox Column  
+              <ng-container matColumnDef="select">    
+                <th style="width: 100px;" mat-header-cell *matHeaderCellDef>    
+                  <mat-checkbox (change)="$event ? masterToggle() : null"    
+                                [checked]="selection.hasValue() && isAllSelected()"    
+                                [indeterminate]="selection.hasValue() && !isAllSelected()"></mat-checkbox>    
+                </th>    
+                <td mat-cell *matCellDef="let row">    
+                  <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"    
+                                [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)"></mat-checkbox>    
+                </td>    
+              </ng-container>    
+       
+              <ng-container matColumnDef="Title">    
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>    
+                <td mat-cell *matCellDef="let album"> {{album.Title}} </td>    
+              </ng-container>    
+       
+              <ng-container matColumnDef="Year">    
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Year </th>    
+                <td mat-cell *matCellDef="let album"> {{album.Year}} </td>    
+              </ng-container>     
+       
+              <ng-container matColumnDef="Artist">    
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Artist </th>    
+                <td mat-cell *matCellDef="let album"> {{album.Artist}} </td>    
+              </ng-container>    
+       
+              <ng-container matColumnDef="Label">    
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Label </th>    
+                <td mat-cell *matCellDef="let album"> {{album.Label}} </td>    
+              </ng-container>    
+
+              <ng-container matColumnDef="Edit">    
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Edit </th>    
+       
+                <td mat-cell *matCellDef="let album">    
+       
+                  <button mat-icon-button aria-label="Example icon button with a vertical three dot icon" type="button" mat-raised-button color="accent" matTooltip="Edit" (click)="loadAlbumToEdit(album.Id)"><mat-icon>edit</mat-icon></button>    
+       
+                </td>    
+              </ng-container>    
+       
+              <ng-container matColumnDef="Delete">    
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Delete </th>    
+                <td mat-cell *matCellDef="let album"> <button mat-icon-button aria-label="Example icon button with a delete icon" type="button" mat-raised-button color="accent" matTooltip="Delete" (click)="deleteAlbum(album.Id)"><mat-icon>delete_forever</mat-icon></button></td>    
+              </ng-container>    
+       
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>    
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>    
+            </table>    
+       
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>    
+          </div>    
+       
+        </form>    
+      </mat-card-content>    
+    </mat-card>    
+  </div>      -->
+  <!--<div class="container">  
+    
+    <form [formGroup]="service.albumForm" (ngSubmit)="this[EventValue]()">  
+        
+        <h3>Album CRUD Operation</h3>  
+        <div class="row">  
+             
+        <table class="table">  
+        <tr>  
+          <td>Title</td>  
+          <td>  
+            <input type="hidden" formControlName="Id">  
+            <input type="text" formControlName="Title">  
+            <div *ngIf="submitted && service.albumForm.controls.Title.errors" class="text-danger">  
+              <div *ngIf="service.albumForm.controls.Title.errors.required">Title is required</div>  
+            </div>   
+          </td>  
+        </tr>  
+          
+        <tr>  
+          <td>Year</td>  
+          <td><input type="text" formControlName="Year">  
+            <div *ngIf="submitted && service.albumForm.controls.Year.errors" class="text-danger">  
+              <div *ngIf="service.albumForm.controls.Year.errors.required">Year is required</div>  
+            </div>   
+          </td>  
+        </tr> 
+        <tr>
+        <td>Artist</td>
+           <td><select id="ArtistId" formControlName="Artist">
+                <option disabled>Select Artist</option>
+                <option>Choose Artist</option>
+                <option *ngFor="let artistitem of artistArray" [value]="artistitem.Id">{{artistitem.Name}}</option>
+            </select>
+            <div *ngIf="submitted && service.albumForm.controls.ArtistId.errors" class="text-danger">  
+                <div *ngIf="service.albumForm.controls.ArtistId.errors.required">ArtistId is required</div>  
+              </div> 
+           </td>
+         </tr> 
+        <tr>
+            <td>Label</td>
+            <td>
+            <select id="LabelId" formControlName="Label">
+                <option disabled>Select Label</option>
+                <option>Choose Label</option>
+                <option *ngFor="let labelitem of labelArray" [value]="labelitem.Id">{{labelitem.Name}}</option>
+            </select>
+            <div *ngIf="submitted && service.albumForm.controls.LabelId.errors" class="text-danger">  
+                <div *ngIf="service.albumForm.controls.LabelId.errors.required">LabelId is required</div>  
+              </div> 
+        </td>
+        </tr>
+        <tr>  
+      
+          <td colspan="2">  
+            <button type="submit" class="btn btn-primary">{{EventValue}}</button>  
+          </td>  
+        </tr>  
+          
+      </table>  
+      </div>  
+         
+     <div class="row">  
+      <table class="table table-striped">  
+        <tr>  
+          <td>Title</td>  
+            
+          <td>Year</td>  
+          <td>Artist</td>  
+          <td>Label</td>  
+          <td>Edit</td>  
+          <td>Delete</td>  
+        </tr>  
+      
+        <tr *ngFor="let d of data">  
+          <td>{{d.Title}}</td>  
+           
+          <td>{{d.Year}}</td>  
+          <td>{{d.ArtistId}}</td>  
+          <td>{{d.LabelId}}</td>  
+          <td><a (click)="EditData(d)" class="btn btn-warning">Edit</a></td>  
+          <td><a (click)="deleteData(d.Id)" class="btn btn-danger">Delete</a></td>    
+        </tr>  
+      </table>  
+    </div>  
+    </form>  
+      
+    </div>  -->

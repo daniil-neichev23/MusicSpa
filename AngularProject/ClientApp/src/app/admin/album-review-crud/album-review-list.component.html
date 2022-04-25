@@ -1,0 +1,32 @@
+<div class="loadWrapper" *ngIf="isLoading">  
+  <div class="loader"></div>  
+</div>
+<div>
+    <br />
+    <div class="row">
+      <div class="col">
+        <h3>Album Reviews</h3>
+      </div>
+    </div>
+    <br /> 
+
+    <table class="table table-bordered table-sm">
+        <thead>
+      <tr>
+        <th>Ranking</th>
+        <th>Comment</th>
+        <th>Album</th>
+        <th>Reviewer</th>
+        <th width="200px"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let alr of Data">
+        <td>{{ alr.ranking }}</td>
+        <td>{{ alr.comment }}</td>
+        <td>{{ alr.album.title }}</td>
+        <td>{{ alr.reviewer.joined }}</td>
+      </tr>
+    </tbody>
+    </table>
+  </div>

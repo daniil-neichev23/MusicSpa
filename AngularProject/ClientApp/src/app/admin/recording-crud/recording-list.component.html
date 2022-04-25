@@ -1,0 +1,63 @@
+<div class="loadWrapper" *ngIf="isLoading">  
+  <div class="loader"></div>  
+</div>
+<div>
+    <br />
+    <div class="row">
+      <div class="col">
+        <h3>Recordings</h3>
+      </div>
+      <div class="col text-right">
+        <a href="#" routerLink="/admin/recording-list/create/" class="btn btn-success btn-sm">Create New</a>
+      </div>
+    </div>
+    <br /> 
+
+    <div class="album py-5">
+        <div class="container">
+            <div class="row">
+                <div class="card-body" *ngFor="let ar of Data">
+                   
+                        <div class="card mb-4 box-shadow">
+                            <p>{{ar.title}}</p>
+                            <p>{{ar.trackNumber}}</p>
+                            <p>{{ar.length}}</p>
+                            <p>{{ar.album.title}}</p>
+                            <p>{{ar.genre.name}}</p>
+                            <ul *ngFor="let p of ar.trackReviews"><li>{{ p.comment }}</li></ul>
+                            <!-- <ul *ngFor="let t of ar.groupmembers"><li>{{ t.title }}</li></ul> -->
+                            <a href="#" [routerLink]="['/admin/track-review-list/update/',ar.id]" class="btn btn-primary btn-sm">Edit</a> 
+                            <button type="button" (click)="deleteData(ar.id)" class="btn btn-danger btn-sm">Delete</button> 
+                            </div>
+                        </div>
+            </div>
+        </div>
+    </div>    
+    <!-- <table class="table table-bordered table-sm">
+        <thead>
+      <tr>
+        <th>Title</th>
+        <th>Track Number</th>
+        <th>Length</th>
+        <th>Album</th>
+        <th>Genre</th>
+        <th>Reviews</th>
+        <th width="200px"></th>
+      </tr>
+    </thead>
+    <tbody> 
+      <tr *ngFor="let trrev of Data">
+        <td>{{ trrev.title }}</td>
+        <td>{{ trrev.trackNumber }}</td>
+        <td>{{ trrev.length }}</td>
+        <td>{{ trrev.album.title }}</td>
+        <td>{{ trrev.genre.name }}</td>
+        <td *ngFor="let t of trrev.trackReviews"><li>{{ t.Comment }}</li></td>
+        <td class="text-right"> 
+          <a href="#" [routerLink]="['/admin/recording-list/update/',trrev.id]" class="btn btn-primary btn-sm">Edit</a> 
+          <button type="button" (click)="deleteData(trrev.id)" class="btn btn-danger btn-sm">Delete</button> 
+        </td>
+      </tr>
+    </tbody>
+    </table> -->
+  </div>

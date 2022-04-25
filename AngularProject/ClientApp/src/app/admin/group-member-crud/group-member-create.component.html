@@ -1,0 +1,56 @@
+<div >
+    <br />
+    <div class="row">
+      <div class="col">
+        <h3>Create Group Member</h3>
+      </div>
+      <div class="col text-right">
+        <a href="#" routerLink="/admin/group-member-list" class="btn btn-secondary btn-sm" id="button3">Back To Group Members List</a>
+      </div>
+    </div>
+    <br />
+    <form [formGroup]="service.groupMemberForm" (ngSubmit)="onSubmit()" autocomplete="off">
+        
+      <div class="form-group">
+        <label for="Joined">Joined: </label>
+        <input formControlName="Joined"
+               id="Joined"
+               type="text"
+               class="form-control" />
+      </div>
+   
+      <div class="form-group">
+        <label for="Left">Left: </label>
+        <input formControlName="Left"
+               id="Left"
+               type="text"
+               class="form-control" />
+      </div>
+   
+      <div class="form-group">
+        <label for="musician-lastname">Musician:</label>
+        <select formControlName="MusicianId"
+                id="MusicianId"
+                class="form-control">
+          <option value="">- Select -</option>
+          <option *ngFor="let art of musicianArray" [ngValue]="art.id">
+            {{art.lastName}}
+          </option>
+        </select>
+      </div>
+  
+      <div class="form-group">
+        <label for="artist-name">Artist:</label>
+        <select formControlName="ArtistId"
+                id="ArtistId"
+                class="form-control">
+          <option value="">- Select -</option>
+          <option *ngFor="let lab of artistArray" [ngValue]="lab.id">
+            {{lab.name}}
+          </option>
+        </select>
+      </div>
+   
+      <button class="btn btn-primary" type="submit" [disabled]="!service.groupMemberForm.valid">Create</button>
+    </form>
+  </div>

@@ -1,0 +1,51 @@
+<div class="loadWrapper" *ngIf="isLoading">  
+  <div class="loader"></div>  
+</div>
+<div>
+    <br />
+    <div class="row">
+      <div class="col">
+        <h3>Reviewers</h3>
+      </div>
+      <!-- <div class="col text-right">
+        <a href="#" routerLink="/admin/reviewer-list/create/" class="btn btn-success btn-sm">Create New</a>
+      </div> -->
+    </div>
+    <br /> 
+
+    <div class="album py-5">
+        <div class="container">
+            <div class="row">
+                <div class="card-body" *ngFor="let ar of Data">
+                   
+                        <div class="card mb-4 box-shadow">
+                            <p>{{ar.joined}}</p>
+                            <ul *ngFor="let p of ar.albumReviews"><li>{{ p.comment }}</li></ul>
+                            <ul *ngFor="let l of ar.trackReviews"><li>{{l.comment}}</li></ul>
+                            <!-- <ul *ngFor="let t of ar.groupmembers"><li>{{ t.title }}</li></ul> -->
+                            </div>
+                        </div>
+            </div>
+        </div>
+    </div>  
+    <!-- <table class="table table-bordered table-sm">
+        <thead>
+      <tr>
+        <th>Joined</th>
+        <th>AlbumReviews</th>
+        <th>TrackReviews</th>
+        <th width="200px"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let lab of Data">
+        <td>{{ lab.name }}</td>
+        <td *ngFor="let p of lab.albumReviews"><li>{{ p.title }}</li></td>
+        <td class="text-right"> 
+          <a href="#" [routerLink]="['/admin/label-list/update/',lab.id]" class="btn btn-primary btn-sm">Edit</a> 
+          <button type="button" (click)="deleteData(lab.id)" class="btn btn-danger btn-sm">Delete</button> 
+        </td>
+      </tr>
+    </tbody>
+    </table> -->
+  </div>
